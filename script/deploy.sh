@@ -33,6 +33,9 @@ rm -rf out/**/* || exit 0
 # Run our compile script
 doCompile
 
+#copy CNAME file
+cp CNAME out
+
 # Now let's go have some fun with the cloned repo
 cd out
 git config user.name "Travis CI"
