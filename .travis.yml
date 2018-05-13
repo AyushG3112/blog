@@ -2,8 +2,6 @@ language: ruby
 rvm:
 - 2.5.0
 before_script:
-- npm install -g bower
-- bower install
 - chmod +x ./script/deploy.sh
 script: bash ./script/deploy.sh
 env:
