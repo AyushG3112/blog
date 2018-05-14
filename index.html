@@ -50,6 +50,13 @@
 
     <div class="sidebar-toggle-wrapper">
       
+        <button class="search-toggle" type="button">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <title>Search</title>
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+      
 
       <button class="toggle navicon-button larr" type="button">
         <span class="toggle-inner">
@@ -77,9 +84,6 @@
     
       
       
-    
-      
-      
         <li class="menu-item">
           <a href="/about/" itemprop="url">
             <span itemprop="name">About</span>
@@ -89,17 +93,11 @@
     
       
       
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
+        <li class="menu-item">
+          <a href="/categories/" itemprop="url">
+            <span itemprop="name">Categories</span>
+          </a>
+        </li>
       
     
   </ul>
@@ -228,7 +226,8 @@
 
         <div class="search-content">
           <div class="inner">
-  
+  <div tabindex="-1" class="search-searchbar"></div>
+        <div class="search-hits"></div>
 </div>
 
         </div>
@@ -249,6 +248,58 @@
 
 <script async src="/assets/javascripts/main.js"></script>
 
+<!-- Including InstantSearch.js library and styling -->
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css">
+
+<script>
+// Instanciating InstantSearch.js with Algolia credentials
+const search = instantsearch({
+  appId: 'T0J2N8XUWR',
+  apiKey: '5ce01bf1607e1e2c388dfa58248bef20',
+  indexName: 'techknowpeeps_posts',
+  searchParameters: {
+    restrictSearchableAttributes: [
+      'title',
+      'content'
+    ]
+  }
+});
+
+const hitTemplate = function(hit) {
+  const url = hit.url;
+  const title = hit._highlightResult.title.value;
+  const content = hit._highlightResult.html.value;
+
+  return `
+    <article class="entry">
+      <h3 class="entry-title"><a href="${url}">${title}</a></h3>
+      <div class="entry-excerpt">${content}</div>
+    </article>
+  `;
+}
+
+// Adding searchbar and results widgets
+search.addWidget(
+  instantsearch.widgets.searchBox({
+    container: '.search-searchbar',
+    poweredBy: true,
+    placeholder: 'Enter your search term...'
+  })
+);
+search.addWidget(
+  instantsearch.widgets.hits({
+    container: '.search-hits',
+    templates: {
+      item: hitTemplate
+    }
+  })
+);
+
+// Starting the search
+search.start();
+</script>
 
 
 
