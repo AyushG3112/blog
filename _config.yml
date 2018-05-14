@@ -28,6 +28,14 @@ remote_theme: "mmistakes/jekyll-theme-basically-basic"
 plugins:
   - jekyll-feed
 
+# Search Settings:
+search: true
+search_provider: algolia
+algolia:
+  application_id: T0J2N8XUWR
+  index_name: techknowpeeps_posts
+  search_only_api_key: 5ce01bf1607e1e2c388dfa58248bef20
+  powered_by: true
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
 # to override the default setting.
