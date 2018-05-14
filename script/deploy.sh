@@ -15,6 +15,9 @@ if [ "$TRAVIS_PULL_REQUEST" != "false" -o "$TRAVIS_BRANCH" != "$SOURCE_BRANCH" ]
     exit 0
 fi
 
+# Build Search 
+bundle exec jekyll algolia
+
 # Save some useful information
 REPO=`git config remote.origin.url`
 SSH_REPO=${REPO/https:\/\/github.com\//git@github.com:}
@@ -64,7 +67,4 @@ ssh-add travis_ayushg3112_blog
 
 # Now that we're all set up, we can push.
 git push $SSH_REPO $TARGET_BRANCH
-
-# Build Search 
-jekyll algolia
 
