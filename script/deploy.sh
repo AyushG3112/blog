@@ -66,5 +66,5 @@ ssh-add travis_ayushg3112_blog
 git push $SSH_REPO $TARGET_BRANCH
 
 # Build Search 
-bundle exec jekyll algolia
+jekyll algolia
 
