@@ -33,6 +33,9 @@ rm -rf out/**/* || exit 0
 # Run our compile script
 doCompile
 
+# Build Search 
+bundle exec jekyll algolia
+
 #copy CNAME file
 cp CNAME out
 
@@ -61,9 +64,6 @@ openssl aes-256-cbc -K $ENCRYPTED_KEY -iv $ENCRYPTED_IV -in travis_ayushg3112_bl
 chmod 600 travis_ayushg3112_blog
 eval `ssh-agent -s`
 ssh-add travis_ayushg3112_blog
-
-# Build Search 
-bundle exec jekyll algolia
 
 # Now that we're all set up, we can push.
 git push $SSH_REPO $TARGET_BRANCH
