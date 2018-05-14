@@ -62,8 +62,10 @@ chmod 600 travis_ayushg3112_blog
 eval `ssh-agent -s`
 ssh-add travis_ayushg3112_blog
 
+# Build Search 
+bundle exec jekyll algolia
+
 # Now that we're all set up, we can push.
 git push $SSH_REPO $TARGET_BRANCH
 
-# Build Search 
-bundle exec jekyll algolia
+
